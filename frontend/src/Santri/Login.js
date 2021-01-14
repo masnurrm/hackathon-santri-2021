@@ -6,7 +6,9 @@ export default function Login() {
 			<img src="/Santri.png" alt="santri" className="w-6/12" />
 			<span className="w-1/12"></span>
 			<div className="form w-4/12 flex flex-col my-auto">
-				<span className="text-gray-600 text-2xl text-center">Santri Login</span>
+				<span className="text-gray-600 text-3xl my-2 text-center">
+					Santri Login
+				</span>
 				<div class="flex my-2">
 					<div class="input-icon">
 						<i class="mdi mdi-account-outline text-gray-400 text-lg"></i>
