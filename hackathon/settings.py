@@ -38,11 +38,22 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'backend.apps.BackendConfig',
-    'rest_framework'
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'corsheaders',
+    'rest_auth',
+    'rest_framework',
+    'rest_framework.authtoken',
+
+    'backend.apps.BackendConfig'
 ]
 
+SITE_ID = 1
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -124,3 +135,14 @@ STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'backend.CustomUser'
 
+ACCOUNT_EMAIL_VERIFICATION = None
+
+ACCOUNT_EMAIL_REQUIRED = False
+
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication', 
+    ],
+}
