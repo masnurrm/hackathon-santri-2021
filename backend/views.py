@@ -1,59 +1,28 @@
 from django.shortcuts import render
-from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework import permissions
 from rest_framework import status
+from rest_framework import viewsets
 from rest_framework.response import Response
 from django.http import HttpResponse
+from rest_framework import generics
 
-from .models import CustomUser, Laporan
-from .serializers import CustomUserSerializer, LaporanSerializer
+from .models import CustomUser, Laporan, RiwayatPenyakit
+from .serializers import CustomUserSerializer, LaporanSerializer, RiwayatPenyakitSerializer
 
 def index(request):
     return HttpResponse("Halo halo")
 
 class LaporanViewset(viewsets.ModelViewSet):
-    permission_classes = [permissions.IsAuthenticated]
-    queryset = Laporan.objects.all()
     serializer_class = LaporanSerializer
+    queryset = Laporan.objects.all()
 
-class LaporanList(APIView):
+    def perform_create(self, serializer):
+        serializer.save(pelapor=self.request.user)
 
-    permission_classes = [permissions.IsAuthenticated]
-
-    def get(self, request):
-        laporan = Laporan.objects.all()
-        serializer = LaporanSerializer(laporan, many=True)
-        return Response(serializer.data)
-    def post(self, request):
-        request['nomor_induk'] = request.user.nomor_induk
-        serializer = LaporanSerializer(data=request)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-class LaporanDetail(APIView):
-
-    permission_classes = [permissions.IsAuthenticated]
-    
-    def get_laporan(self, pk):
-        try:
-            return Laporan.objects.get(pk=pk)
-        except:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-    
-    def get(self, request, pk):
-        laporan = self.get_laporan(pk)
-        serializer = LaporanSerializer(laporan)
-        return Response(serializer.data)
-
-class CustomUserViewset(viewsets.ModelViewSet):
-    
-    permission_classes = [permissions.IsAuthenticated]
-    
-    queryset = CustomUser.objects.all()
-    serializer_class = CustomUserSerializer
+class RiwayatPenyakitViewset(viewsets.ModelViewSet):
+    serializer_class = RiwayatPenyakitSerializer
+    queryset = RiwayatPenyakit.objects.all()
 
 class CustomUserDetail(APIView):
     

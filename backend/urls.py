@@ -8,13 +8,16 @@ from rest_framework_simplejwt.views import (
 from .views import (
     CustomUserList, 
     CustomUserDetail,
-    LaporanDetail,
-    LaporanList
+    LaporanViewset,
+    RiwayatPenyakitViewset
 )
 
+router = routers.SimpleRouter()
+router.register(r'laporan', LaporanViewset)
+router.register(r'riwayat', RiwayatPenyakitViewset)
+
 urlpatterns = [
-    path('laporan/', LaporanList.as_view()),
-    path('laporan/<int:pk>/', LaporanDetail.as_view()),
+    path('', include(router.urls)),
     path('users/', CustomUserList.as_view()),
     path('users/<str:nomor_induk>/', CustomUserDetail.as_view()),
     path('token/', TokenObtainPairView.as_view(), name='obtain_token'),

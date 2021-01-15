@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Laporan, CustomUser
+from .models import Laporan, CustomUser, RiwayatPenyakit
 
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,4 +10,10 @@ class CustomUserSerializer(serializers.ModelSerializer):
 class LaporanSerializer(serializers.ModelSerializer):
     class Meta:
         model = Laporan
-        fields = ['nomor_induk_pelapor', 'nomor_induk_dilaporkan', 'keluhan', 'tanggal_laporan', 'status_laporan', 'lapor_pusat']
+        fields = ['pelapor', 'dilaporkan', 'keluhan', 'tanggal_laporan', 'status_laporan', 'lapor_pusat']
+        depth = 1
+
+class RiwayatPenyakitSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RiwayatPenyakit
+        fields = '__all__'

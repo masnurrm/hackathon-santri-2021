@@ -12,7 +12,7 @@ class CustomUser(AbstractUser):
     telepon = models.CharField(max_length=13, unique=True)
     alamat = models.CharField(max_length=256)
     tanggal_lahir = models.CharField(max_length=16)
-    penyakit_bawaan = models.CharField(max_length=64)
+    penyakit_bawaan = models.CharField(max_length=64, blank=True)
 
     USERNAME_FIELD = 'nomor_induk'
     REQUIRED_FIELDS = []
@@ -24,10 +24,15 @@ class CustomUser(AbstractUser):
 
 
 class Laporan(models.Model):
-    nomor_induk_pelapor = models.IntegerField(_("nomor induk pelapor"))
-    nomor_induk_dilaporkan = models.IntegerField(_("nomor induk dilaporkan"))
+    pelapor = models.ForeignKey(CustomUser, related_name='pelapor', to_field='nomor_induk', on_delete=models.CASCADE)
+    dilaporkan = models.ForeignKey(CustomUser, related_name='dilaporkan', to_field='nomor_induk', on_delete=models.CASCADE)
     keluhan = models.CharField(max_length=64)
     tanggal_laporan = models.CharField(max_length=16)
     status_laporan = models.CharField(max_length=32)
     asrama = models.CharField(max_length=8, default="Belum diatur")
     lapor_pusat = models.BooleanField(default=False)
+
+class RiwayatPenyakit(models.Model):
+    user = models.ForeignKey(CustomUser, to_field='nomor_induk', on_delete=models.CASCADE)
+    riwayat = models.CharField(max_length=64)
+
