@@ -13,7 +13,6 @@ class CustomUser(AbstractUser):
     alamat = models.CharField(max_length=256)
     tanggal_lahir = models.CharField(max_length=16)
     penyakit_bawaan = models.CharField(max_length=64)
-    models.CharField()
 
     USERNAME_FIELD = 'nomor_induk'
     REQUIRED_FIELDS = []
