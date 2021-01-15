@@ -14,6 +14,7 @@ def index(request):
     return HttpResponse("Halo halo")
 
 class LaporanViewset(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = LaporanSerializer
     queryset = Laporan.objects.all()
 
@@ -21,11 +22,11 @@ class LaporanViewset(viewsets.ModelViewSet):
         serializer.save(pelapor=self.request.user)
 
 class RiwayatPenyakitViewset(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = RiwayatPenyakitSerializer
     queryset = RiwayatPenyakit.objects.all()
 
 class CustomUserDetail(APIView):
-    
     permission_classes = [permissions.IsAuthenticated]
     
     def get_user(self, nomor_induk):
