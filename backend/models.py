@@ -24,8 +24,8 @@ class CustomUser(AbstractUser):
 
 
 class Laporan(models.Model):
-    id_pelapor = models.IntegerField(_("nomor induk pelapor"))
-    id_dilaporkan = models.IntegerField(_("nomor induk dilaporkan"))
+    nomor_induk_pelapor = models.IntegerField(_("nomor induk pelapor"))
+    nomor_induk_dilaporkan = models.IntegerField(_("nomor induk dilaporkan"))
     keluhan = models.CharField(max_length=64)
     tanggal_laporan = models.CharField(max_length=16)
     status_laporan = models.CharField(max_length=32)
