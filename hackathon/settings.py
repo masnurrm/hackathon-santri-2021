@@ -26,7 +26,7 @@ SECRET_KEY = 'ho4mixp!swrgzt6tydgm66bfcd$&@w=vvxi^$k7*l73wdz6_j+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['santri-sehat.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['santrisehat.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
