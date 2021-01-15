@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from .managers import CustomUserManager
 
+
 class CustomUser(AbstractUser):
     username = None
     nama = models.CharField(max_length=64, default="UnNamed")
@@ -12,6 +13,7 @@ class CustomUser(AbstractUser):
     alamat = models.CharField(max_length=256)
     tanggal_lahir = models.CharField(max_length=16)
     penyakit_bawaan = models.CharField(max_length=64)
+    models.CharField()
 
     USERNAME_FIELD = 'nomor_induk'
     REQUIRED_FIELDS = []
@@ -21,6 +23,7 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.nama
 
+
 class Laporan(models.Model):
     id_pelapor = models.IntegerField(_("nomor induk pelapor"))
     id_dilaporkan = models.IntegerField(_("nomor induk dilaporkan"))
@@ -28,5 +31,4 @@ class Laporan(models.Model):
     tanggal_laporan = models.CharField(max_length=16)
     status_laporan = models.CharField(max_length=32)
     asrama = models.CharField(max_length=8, default="Belum diatur")
-
-
+    lapor_pusat = models.BooleanField(default=False)

@@ -41,9 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'allauth',
     'allauth.account',
-    'allauth.socialaccount',
     'corsheaders',
-    'rest_auth',
+    # 'rest_auth',
     'rest_framework',
     'rest_framework.authtoken',
 
@@ -141,8 +140,20 @@ ACCOUNT_EMAIL_REQUIRED = False
 
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 
+# ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+
+# ACCOUNT_USERNAME_REQUIRED = False
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication', 
-    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
 }
