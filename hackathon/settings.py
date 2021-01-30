@@ -146,9 +146,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 AUTH_USER_MODEL = 'backend.CustomUser'
 
 ACCOUNT_EMAIL_VERIFICATION = None
-
 ACCOUNT_EMAIL_REQUIRED = False
-
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 
 # ACCOUNT_USER_MODEL_USERNAME_FIELD = None
@@ -159,10 +157,11 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [                               
-        "rest_framework.authentication.SessionAuthentication",        
         "rest_framework_simplejwt.authentication.JWTAuthentication",   
+        "rest_framework.authentication.SessionAuthentication",        
     ],
-    "DEFAULT_PARSER_CLASSES": ["rest_framework.parsers.JSONParser",
+    "DEFAULT_PARSER_CLASSES": [
+        "rest_framework.parsers.JSONParser",
     ],                    
 }
 
@@ -170,3 +169,10 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(hours=2),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
+
+# REDIS related settings 
+# REDIS_HOST = 'localhost'
+# REDIS_PORT = '6379'
+# BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+# BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600} 
+# CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'

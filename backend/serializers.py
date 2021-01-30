@@ -10,8 +10,12 @@ class CustomUserSerializer(serializers.ModelSerializer):
 class LaporanSerializer(serializers.ModelSerializer):
     class Meta:
         model = Laporan
-        fields = ['pelapor', 'dilaporkan', 'keluhan', 'tanggal_laporan', 'status_laporan', 'lapor_pusat']
-        depth = 1
+        fields = ['id', 'pelapor', 'dilaporkan', 'keluhan', 'tanggal_laporan', 'status_laporan', 'lapor_pusat']
+    
+    def to_representation(self, instance):
+        self.fields['pelapor'] =  CustomUserSerializer(read_only=True)
+        self.fields['dilaporkan'] =  CustomUserSerializer(read_only=True)
+        return super(LaporanSerializer, self).to_representation(instance)
 
 class RiwayatPenyakitSerializer(serializers.ModelSerializer):
     class Meta:
