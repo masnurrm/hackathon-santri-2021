@@ -18,11 +18,11 @@ from django.urls import path, include
 from backend import views
 
 urlpatterns = [
+    path('', views.index),
+    path('admin/', admin.site.urls),
+    path('api/', include('backend.urls'))
     # path('api-auth/', include('rest_framework.urls')),
     # path('res-auth/', include('rest_auth.urls')),
-    path('', views.index),
-    path('auth/', include('rest_framework.urls')),
-    path('admin/', admin.site.urls),
-    path('accounts/', include('allauth.urls')),
-    path('api/', include('backend.urls'))
+    # path('auth/', include('rest_framework.urls')),
+    # path('accounts/', include('allauth.urls')),
 ]
