@@ -1,7 +1,6 @@
 # from rest_framework import routers
 from django.urls import path, include
 from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
     TokenRefreshView,
 )
 
@@ -15,6 +14,7 @@ from .views import (
     LaporanDetailUserView,
     RiwayatPenyakitCreateView,
     RiwayatPenyakitDetailView,
+    CustomTOPV
     # DahLogin
     # LaporanViewset,
 )
@@ -34,6 +34,6 @@ urlpatterns = [
     path('riwayat/create/<str:nomor_induk>', RiwayatPenyakitCreateView.as_view()),
     path('users/', CustomUserList.as_view()),
     path('users/<str:nomor_induk>', CustomUserDetail.as_view()),
-    path('token/', TokenObtainPairView.as_view(), name='obtain_token'),
+    path('token/', CustomTOPV.as_view(), name='obtain_token'),
     path('refresh/', TokenRefreshView.as_view(), name='token_refresh')
 ]

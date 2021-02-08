@@ -7,12 +7,13 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework_simplejwt import authentication
+from rest_framework_simplejwt.views import TokenObtainPairView
 from django.http import HttpResponse
 from .tasks import laporkan_pusat
 import json
 
 from .models import CustomUser, Laporan, RiwayatPenyakit
-from .serializers import CustomUserSerializer, LaporanSerializer, RiwayatPenyakitSerializer
+from .serializers import CustomUserSerializer, LaporanSerializer, RiwayatPenyakitSerializer, CustomTOPS
 
 def index(request):
     return HttpResponse("Halo halo")
@@ -164,3 +165,6 @@ class CustomUserList(APIView):
         users = CustomUser.objects.all()
         serializer = CustomUserSerializer(users, many=True)
         return Response(serializer.data)
+
+class CustomTOPV(TokenObtainPairView):
+    serializer_class = CustomTOPS
