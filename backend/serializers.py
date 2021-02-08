@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from .models import Laporan, CustomUser, RiwayatPenyakit
 
@@ -21,3 +22,13 @@ class RiwayatPenyakitSerializer(serializers.ModelSerializer):
     class Meta:
         model = RiwayatPenyakit
         fields = '__all__'
+
+class CustomTOPS(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        serializer = CustomUserSerializer(user)
+        token['user'] = serializer.data
+
+        return token
