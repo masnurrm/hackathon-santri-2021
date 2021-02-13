@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-from .models import Laporan, CustomUser, RiwayatPenyakit
+from .models import Laporan, CustomUser, RiwayatPenyakit, Pengaduan
 
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -32,3 +32,11 @@ class CustomTOPS(TokenObtainPairSerializer):
         token['user'] = serializer.data
 
         return token
+
+class PengaduanSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Pengaduan 
+        fields = '__all__'
+
+class PasswordResetSerializer(serializers.Serializer):
+    nomor_induk = serializers.CharField(required=True)
