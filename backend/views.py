@@ -36,7 +36,8 @@ class LaporanListView(APIView):
         serializer = LaporanSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(pelapor=request.user)
-            laporkan_pusat.delay(serializer.data)
+            laporkan_pusat.delay(serializer.data['id'])
+            # laporkan_pusat.delay(serializer)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -191,6 +192,7 @@ class CustomUserList(APIView):
 
 class CustomTOPV(TokenObtainPairView):
     serializer_class = CustomTOPS
+<<<<<<< HEAD
 
 class PasswordResetEmail(APIView):
     def get_user(self, nomor_induk):
@@ -260,3 +262,5 @@ class PasswordReset(APIView):
             return Response(data)
         data['response'] = False
         return Response(data)
+=======
+>>>>>>> cf6f5505a2b4652c528bd3b66e20ce71e462a748
