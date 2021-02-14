@@ -170,6 +170,18 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=2),
 }
 
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "santrisehat2020@gmail.com"
+EMAIL_HOST_PASSWORD = "12345678rahasia"
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+CELERY_BROKER_URL = 'redis://:p8dcbd22056b2869a368335bbbe052fa2c2225d916e4fae31bcd34f44e9abe668@ec2-107-23-72-44.compute-1.amazonaws.com:8929'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+
 # REDIS related settings 
 # REDIS_HOST = 'localhost'
 # REDIS_PORT = '6379'
