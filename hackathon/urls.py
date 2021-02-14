@@ -20,6 +20,7 @@ from backend import views
 urlpatterns = [
     path('', views.index),
     path('admin/', admin.site.urls),
+    path("password_reset/", views.PasswordResetEmail.as_view(), name="password_reset"),
     path('api/', include('backend.urls'))
     # path('api-auth/', include('rest_framework.urls')),
     # path('res-auth/', include('rest_auth.urls')),
