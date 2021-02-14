@@ -36,7 +36,7 @@ class LaporanListView(APIView):
         serializer = LaporanSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(pelapor=request.user)
-            laporkan_pusat.delay(serializer.data)
+            laporkan_pusat.delay(serializer.data['id'])
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
