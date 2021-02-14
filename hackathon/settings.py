@@ -179,6 +179,9 @@ EMAIL_HOST_PASSWORD = "12345678rahasia"
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
+CELERY_BROKER_URL = 'redis://:p8dcbd22056b2869a368335bbbe052fa2c2225d916e4fae31bcd34f44e9abe668@ec2-107-23-72-44.compute-1.amazonaws.com:8929'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
 
 # REDIS related settings 
 # REDIS_HOST = 'localhost'
